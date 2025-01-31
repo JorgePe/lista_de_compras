@@ -120,10 +120,10 @@ exibe um estado 'not checked' a que acresecenta um link para poder ser
 alterado o estado (apenas é possível alterar para 'checked').
 
 Tentei reresentar estes estados ('checked' e 'not checked') de forma visual
-sob a forma de ícones (W3-CSS Font Awesome 5)[https://www.w3schools.com/icons/icons_reference.asp].
+sob a forma de ícones [W3-CSS Font Awesome 5](https://www.w3schools.com/icons/icons_reference.asp).
 
 A quarta coluna é sempre preenchida com um link que permite remover o item da
-base de dados. Também usa um ícone (W3-CSS Font Awesome 5)[https://www.w3schools.com/icons/icons_reference.asp].
+base de dados. Também usa um ícone [W3-CSS Font Awesome 5](https://www.w3schools.com/icons/icons_reference.asp).
 
 
 ### a página de adição de artigos
