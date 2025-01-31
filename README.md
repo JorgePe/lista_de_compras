@@ -56,7 +56,7 @@ embelezar as páginas mas optei por utilizar [W3-CSS](https://www.w3schools.com/
 directamente inline (ou seja é necessário acesso à internet durante a execução do web server).
 
 
-### Utilização
+## Utilização
 
 Iniciar o web server:
 
@@ -74,3 +74,73 @@ WARNING: This is a development server. Do not use it in a production deployment.
 e podemos aceder à web app pelo link [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 
+## Explicação
+
+### a página principal
+
+A página principal ('index.html') constrói uma tabela HTML com todos os items
+da tabela ARTIGOS na base de dados.
+
+Esta tabela tem 4 colunas:
+
+- 'Produto'
+- 'Quantidade'
+- 'Comprado'
+- 'Remover'
+
+As primeiras duas colunas são preenchidas com os campos 'nome' e 'quantidade'
+de cada item vindo da base de dados, sendo adicionado um link às quantidades
+para permitir ser depois alterados.
+
+A terceira coluna ('Comprado') é preenchida conforma o valor do campo
+'estado' do item - se for '1' exibe um estado 'checked' e se for '0' 
+exibe um estado 'not checked' a que acresecenta um link para poder ser
+alterado o estado (apenas é possível alterar para 'checked').
+
+A quarta coluna é sempree prenchida um link que permite remover o item da
+base de dados.
+
+
+### a página de adição de artigos
+
+Esta página ('adicionar.html') exibe um formulário HTML que pede
+duas entradas de texto:
+
+- 'Produto'
+- 'Quantidade'
+
+Estes valores são usados para criar um novo item na base de dados
+(sempre na tabela ARTIGOS) sendo feito o seguinte mapeamento:
+
+- 'nome' é preenchido com o texto vindo de 'Produto'
+- 'quantidade' é preenchido com o texto vindo de 'Quantidade'
+- 'estado' é sempre preenchido com '0' (not checked)
+
+
+### a página de alteração de quantidades
+
+Esta página ('alteraqtd.html') mostra a quantidade actualmente
+requerida para o item e exibe um formulário HTML que pede uma
+entrada de texto:
+
+- 'Quantidade'
+
+este valor é usado para um update ao campo 'quantidade' do item
+na base de dados.
+
+
+## Ainda por fazer
+
+- applicar estilos W3-CSS às páginas 'adicionar.html' e 'alterarqtd.html'
+- melhorar a explicação
+
+
+## Notas
+
+A lógica da aplicação é extremamente básica, sem validações.
+
+Por exemplo se forem adicionados à lista de compras dois items
+com o mesmo nome (por exemplo 'Leite 1 litro' e 'Leite 2 litros')
+e for marcado um deles como comprado o outro também será.
+
+Da mesma forma se for apagado um o outro também será.
