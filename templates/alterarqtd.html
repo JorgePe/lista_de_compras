@@ -1,27 +1,27 @@
 <!DOCTYPE html> 
 <html> 
-    <head> 
-        <title>Alterar Quantidade de Artigo </title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
+    <head>
+        <title>Alterar Quantidade</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1 /">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" /> 
     </head> 
-    <body> 
-        <table> 
-            <tr> 
-                <th>Produto</th> 
-                <th>Quantidade</th> 
-            </tr> 
-            {%for item in data%} 
-                <tr>
-                    <td>{{item[0]}}</td>
-                    <td>{{item[1]}}</td>
-                </tr> 
-            {%endfor%} 
-        </table>
+    <body>
+        <div class="w3-container w3-twothird">
+            <h1 class="w3-center">Alterar Quantidade</h1>
 
-        <form method="POST"> 
-            <label>Quantidade:</label> 
-            <input type="quantidade" name="quantidade" placeholder="quantidade a comprar" required><br/>
-            <input type = "submit" value = "ALTERAR"/><br/> 
-        </form> 
+            <div class="w3-container">
+                <h2 class="w3-center">
+                    {{data[0][0]}}
+                </h2>
+            </div>
+
+            <form class="w3-container" method="POST"> 
+                <label class="w3-text-blue">Quantidade:</label>
+                <input class="w3-input w3-border" type="quantidade" name="quantidade" placeholder={{data[0][1]}} required><br/>                
+                <input class="w3-btn w3-blue" type = "submit" value = "ALTERAR"/><br/> 
+            </form> 
+
+        </div>
     </body> 
 </html>

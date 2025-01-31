@@ -2,15 +2,21 @@
 <html> 
     <head> 
         <title>Adicionar Artigo </title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
+        <meta name="viewport" content="width=device-width, initial-scale=1 /">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" /> 
     </head> 
-    <body> 
-        <form method="POST"> 
-            <label>Produto:</label> 
-            <input type="nome" name="nome" placeholder="nome do produto a comprar" required><br/> 
-            <label>Quantidade:</label> 
-            <input type="quantidade" name="quantidade" placeholder="quantidade a comprar" required><br/> 
-            <input type = "submit" value = "ADICIONAR"/><br/> 
-        </form> 
+    <body>
+        <div class="w3-container w3-twothird">
+            <h1 class="w3-center">Adicionar produto</h1>
+
+            <form class="w3-container" method="POST"> 
+                <label class="w3-text-blue">Produto:</label> 
+                <input class="w3-input w3-border" type="nome" name="nome" placeholder="nome do produto a comprar" required><br/> 
+                <label class="w3-text-blue">Quantidade:</label> 
+                <input class="w3-input w3-border" type="quantidade" name="quantidade" placeholder="quantidade a comprar" required><br/> 
+                <input class="w3-btn w3-blue" type = "submit" value = "ADICIONAR"/><br/> 
+            </form>
+        </div>
     </body> 
 </html>
