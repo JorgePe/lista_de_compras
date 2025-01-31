@@ -83,6 +83,8 @@ e podemos aceder à web app pelo link [http://127.0.0.1:5000](http://127.0.0.1:5
 A página principal ('index.html') constrói uma tabela HTML com todos os items
 da tabela ARTIGOS na base de dados.
 
+![index.html](index_html.png)
+
 Esta tabela tem 4 colunas:
 
 - 'Produto'
@@ -111,6 +113,8 @@ duas entradas de texto:
 - 'Produto'
 - 'Quantidade'
 
+![adicionar.html](adicionar_html.png)
+
 Estes valores são usados para criar um novo item na base de dados
 (sempre na tabela ARTIGOS) sendo feito o seguinte mapeamento:
 
@@ -127,13 +131,14 @@ entrada de texto:
 
 - 'Quantidade'
 
+![alterarqtd.html](alterarqtd_html.png)
+
 este valor é usado para um update ao campo 'quantidade' do item
 na base de dados.
 
 
 ## Ainda por fazer
 
-- applicar estilos W3-CSS às páginas 'adicionar.html' e 'alterarqtd.html'
 - melhorar a explicação
 
 
