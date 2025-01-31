@@ -16,6 +16,8 @@ Deve ser possível:
 - remover artigos
 - marcar artigos como comprados
 
+![index.html](index_html.png)
+
 ## Implementação
 
 Criar e activar um virtual environment (estou a usar Ubuntu Linux):
