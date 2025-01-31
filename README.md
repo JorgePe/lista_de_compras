@@ -131,6 +131,23 @@ base de dados. Também usa um ícone [W3-CSS Font Awesome 5](https://www.w3schoo
 A aplicação 'app.py' usa esta página ('adicionar.html') para exibir um formulário
 HTML quando se que invoca o endereço '/adicionar'.
 
+Enquanto que as páginas normais apenas requerem comandos HTTP de consulta ('GET')
+os formulários requerem o upload da informação introduzida nos campos ('POST')
+por isso o código python precisa ter em conta qual dos comandos ou métodos foi
+invocado para esta página - se 'GET' limita-se a construir o formulário, se 'POST'
+precisa de extrair os valores que foram sumetidos:
+
+```
+@app.route('/adicionar', methods=['GET', 'POST']) 
+def adicionar(): 
+	if request.method == 'POST':
+		nome = request.form['nome'] 
+		quantidade = request.form['quantidade']     
+        ...
+    else:
+		return render_template('adicionar.html') 
+```
+
 Este formulário pede dois valores de texto:
 
 - 'Produto'
@@ -176,7 +193,13 @@ na base de dados:
         compras.commit()
 ```
 
-concluída a actualização é feito um redirecionamento para a página principal.
+Não está implementada nenhuma validação pelo que é possível alterar a quantidade
+a um artigo já marcado como comprado. Podia ser feita uma validação, por exemplo
+se a nova quantidade fosse superior ser reinicializado o estado e actualizada a
+quantidade para o valor em falta e não ser aceite a alteração para quantidades
+inferiores àquelas já adquiridas (fica para mais tarde).
+
+Concluída a actualização é feito um redirecionamento para a página principal.
 
 
 ### a ação 'Confirmar'
@@ -212,6 +235,9 @@ def confirmar():
 
 evidentemente TODAS as linhas na tabela com o campo 'nome' igual
 ao parâmetro fornecido serão actualizadas já que não é feita qualquer validação.
+
+Apenas é possível marcar um item como comprado, não está previsto mudar
+o estado de um item já marcado (confirmado como comprado) para o estado inicial.
 
 No final é feito o redirecionamento para a página principal para forçar
 um refresh.
@@ -256,7 +282,6 @@ um refresh.
 
 ## Ainda por fazer
 
-- aprofundar um pouco a explicação
 - validar inputs de modo a por exemplo impedir a adição de um artigo com o mesmo
 nome de outro já existente
 
