@@ -298,25 +298,20 @@ consegui ter a minha web app online em pouco tempo.
 
 [Lista de Compras no PythonAnywhere](https://cyberx.pythonanywhere.com/)
 
-### notas
+### notas breves
 
-O flask é um web server que segue a norma WSGI (Web Server Gateway Interface),
+- o flask é um web server que segue a norma WSGI (Web Server Gateway Interface),
 tal como o Django e alguns outros.
-
-PythomAnywhere.com é um serviço de alojamento que segue esta norma, oferecendo 
+- PythonAnywhere.com é um serviço de alojamento que segue esta norma, oferecendo 
 alojamento gratuito para pequenos projectos.
-
-Criei uma conta (gratuita, válida por 3 meses mas renovável) que me permite
+- criei uma conta (gratuita, válida por 3 meses mas renovável) que me permite
 aceder a uma shell onde criei a pasta e o ambiente virtual e instalei as 
 libraries do flask e do sqlite.
-
-Trasferi os meus ficheiros (via browser) para dentro do ambiente virtual
+- transferi os meus ficheiros (via browser) para dentro do ambiente virtual
 ('app.py' e 'database.db' directamente para a pasta e os 3 ficheros .html para
 uma subpasta 'templates').
-
-Depois adicionei uma web app, tendo optado pela opção "Manual Configuration" para poder usar um ambiente virtual.
-
-No final especifiquei o caminho para esse ambiente (i.e. '/home/cyberx/lista_de_compras/lista_de_compras') e editei o ficheiro de configuração WSGI, na
+- adicionei uma web app, tendo optado pela opção "Manual Configuration" para poder usar um ambiente virtual.
+- no final especifiquei o caminho para esse ambiente (i.e. '/home/cyberx/lista_de_compras/lista_de_compras') e editei o ficheiro de configuração WSGI, na
 parte de configuração respeitante ao flask:
 
 ```
@@ -326,12 +321,11 @@ if path not in sys.path:
    sys.path.append(path)
 ```
 
-Finalmente fiz Reload da web app e quase que funcionou: pelos erros do log
+- finalmente fiz Reload da web app e quase que funcionou: pelos erros do log
 não encontrava a base de dades, tive de editar o ficheiro 'app.py' e
 especificar o caminho completo '/home/cyberx/lista_de_compras/database.db'
 em todas as conexões.
-
-Esta web app funciona na porta 443 (HTTPS) em vez da porta 5000 que o flask
+- esta web app funciona na porta 443 (HTTPS) em vez da porta 5000 que o flask
 usa nativamente.
 
 
