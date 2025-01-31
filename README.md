@@ -296,7 +296,7 @@ Existem serviços gratuitos de alojamento de web servers em python.
 Criei uma conta no PythonAnyhwere.com e seguindo as instruções acima
 consegui ter a minha web app online em pouco tempo.
 
-[Lista de Compras](https://cyberx.pythonanywhere.com/)
+[Lista de Compras no PythonAnywhere](https://cyberx.pythonanywhere.com/)
 
 ### notas
 
