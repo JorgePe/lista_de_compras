@@ -1,2 +1,76 @@
 # lista_de_compras
-uma app muito simples em flask para adquirir experiência
+
+Uma app muito simples para adquirir experiência em Python e Flask
+
+## Objectivo
+
+Ter uma página web que mostra uma lista de artigos para comprar,
+respectivas quantidades e uma indicação para cada artigo se já foi ou não
+comprado.
+
+Esta lista deve ser armazenada numa base de dados local.
+
+Deve ser possível:
+
+- adicionar artigos, especificando a respectiva quantidade
+- remover artigos
+- marcar artigos como comprados
+
+## Implementação
+
+Criar e activar um virtual environment (estou a usar Ubuntu Linux):
+
+```
+mkdir lista_de_compras
+python -m virtualenv lista_de_compras
+source lista_de_compras/bin/activate
+```
+
+Instalar as libraries de flask (web server) e sqlite (base de dados):
+
+```
+pip install flask
+pip install db-sqlite3
+```
+
+Criar uma base de dados em formato sqlite3 chamada 'database.db' com uma tabela 'ARTIGOS'
+com 3 campos:
+
+- 'nome' [TEXT]
+- 'quantidade'  [TEXT]
+- 'estado' [INTEGER]
+
+(eu usei uma extensão do vscode para o fazer)
+
+Criar um ficheiro 'app.py' que implementa um web server em flask e gere as conexões
+à base de dados.
+
+Criar uma pasta 'templates' onde ficarão as páginas HTML servidas:
+
+-  "index.html" - a página principal que mostra a lista
+-  'adicionar.html' - um formulário para adicionar um novo artigo à lista
+-  'alterarqtd.html' - um formulário para alterar a quantidade pretendida de um artigo
+
+Podia ser crida também uma pasta 'static' contendo ficheiros de estilos (CSS) para
+embelezar as páginas mas optei por utilizar [W3-CSS](https://www.w3schools.com/w3css/default.asp)
+directamente inline (ou seja é necessário acesso à internet durante a execução do web server).
+
+
+### Utilização
+
+Iniciar o web server:
+
+`python app.py`
+
+deverá surgir uma mensagem do género:
+
+```
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+```
+
+e podemos aceder à web app pelo link [http://127.0.0.1:5000](http://127.0.0.1:5000)
+
+
