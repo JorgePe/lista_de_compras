@@ -1,14 +1,14 @@
 <!DOCTYPE html> 
 <html> 
     <head> 
-        <title>Flask and SQLite </title>
+        <title>Lista de Compras</title>
         <meta name="viewport" content="width=device-width, initial-scale=1 /">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />        
     </head> 
     <body>
       <div class="w3-container w3-twothird">
-        
+
         <h1 class="w3-center">Lista de Compras</h1>       
       
         <div class="w3-container">
@@ -36,12 +36,12 @@
                       <i class="far fa-check-circle"></i>
                       {% endif %}
                   </td>
-          <td class="w3-center">
-            <a href="/remover?nome={{item[0]}}">
-              <button class="w3-button w3-circle"><i class="fas fa-times"></i></button>
-            </a>
-          </td>
-                  </tr> 
+                  <td class="w3-center">
+                    <a href="/remover?nome={{item[0]}}">
+                      <button class="w3-button w3-circle"><i class="fas fa-times"></i></button>
+                    </a>
+                  </td>
+                </tr> 
               {%endfor%} 
             </table>
         </div>

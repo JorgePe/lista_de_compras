@@ -80,29 +80,50 @@ e podemos aceder à web app pelo link [http://127.0.0.1:5000](http://127.0.0.1:5
 
 ### a página principal
 
-A página principal ('index.html') constrói uma tabela HTML com todos os items
-da tabela ARTIGOS na base de dados.
+A aplicação 'app.py' usa esta página ('index.html') como página principal,
+sendo apresentada quando se invoca o endereço principal ('/') ou endereço '/home'.
 
 ![index.html](index_html.png)
 
-Esta tabela tem 4 colunas:
+É estabelecida uma conexão à base de dados e extraídos todos os items da
+tabela ARTIGOS:
+
+```
+	connect = sqlite3.connect('database.db')
+	cursor = connect.cursor() 
+	cursor.execute('SELECT * FROM ARTIGOS') 
+	data = cursor.fetchall() 
+```
+
+de seguida é usada a template 'index.html' para renderizar os dados
+
+```
+	return render_template('index.html', data=data) 
+```
+
+esta template limita-se a construir uma tabela HTML com os dados
+recebidos, dispostos em 4 colunas:
 
 - 'Produto'
 - 'Quantidade'
 - 'Comprado'
 - 'Remover'
 
-As primeiras duas colunas são preenchidas com os campos 'nome' e 'quantidade'
-de cada item vindo da base de dados, sendo adicionado um link às quantidades
-para permitir ser depois alterados.
+As primeiras duas colunas ('Produto' e 'Qualidade') são preenchidas
+com os campos 'nome' e 'quantidade' de cada item vindo da base de dados,
+sendo adicionado um link às quantidades para permitir a
+sua alteração.
 
-A terceira coluna ('Comprado') é preenchida conforma o valor do campo
+A terceira coluna ('Comprado') é preenchida conforme o valor do campo
 'estado' do item - se for '1' exibe um estado 'checked' e se for '0' 
 exibe um estado 'not checked' a que acresecenta um link para poder ser
 alterado o estado (apenas é possível alterar para 'checked').
 
-A quarta coluna é sempree prenchida um link que permite remover o item da
-base de dados.
+Tentei reresentar estes estados ('checked' e 'not checked') de forma visual
+sob a forma de ícones (W3-CSS Font Awesome 5)[https://www.w3schools.com/icons/icons_reference.asp].
+
+A quarta coluna é sempre preenchida com um link que permite remover o item da
+base de dados. Também usa um ícone (W3-CSS Font Awesome 5)[https://www.w3schools.com/icons/icons_reference.asp].
 
 
 ### a página de adição de artigos
@@ -139,7 +160,7 @@ na base de dados.
 
 ## Ainda por fazer
 
-- melhorar a explicação
+- aprofundar um pouco a explicação
 
 
 ## Notas
@@ -150,4 +171,5 @@ Por exemplo se forem adicionados à lista de compras dois items
 com o mesmo nome (por exemplo 'Leite 1 litro' e 'Leite 2 litros')
 e for marcado um deles como comprado o outro também será.
 
-Da mesma forma se for apagado um o outro também será.
+Da mesma forma se for removido um item todos os outros com o
+mesmo nome também serão removidos.
