@@ -128,8 +128,10 @@ base de dados. Também usa um ícone [W3-CSS Font Awesome 5](https://www.w3schoo
 
 ### a página de adição de artigos
 
-Esta página ('adicionar.html') exibe um formulário HTML que pede
-duas entradas de texto:
+A aplicação 'app.py' usa esta página ('adicionar.html') para exibir um formulário
+HTML quando se que invoca o endereço '/adicionar'.
+
+Este formulário pede dois valores de texto:
 
 - 'Produto'
 - 'Quantidade'
@@ -143,24 +145,120 @@ Estes valores são usados para criar um novo item na base de dados
 - 'quantidade' é preenchido com o texto vindo de 'Quantidade'
 - 'estado' é sempre preenchido com '0' (not checked)
 
+```
+    with sqlite3.connect('database.db') as compras: 
+        cursor = compras.cursor() 
+        cursor.execute('INSERT INTO ARTIGOS(nome,quantidade,estado) VALUES (?,?,?)', (nome, quantidade,0))  
+        compras.commit()
+```
+
+depois do novo artigo ser inserido na base de dados é feito um redirecionamento para
+a página principal.
+
 
 ### a página de alteração de quantidades
 
-Esta página ('alteraqtd.html') mostra a quantidade actualmente
-requerida para o item e exibe um formulário HTML que pede uma
-entrada de texto:
+A aplicação 'app.py' usa esta página ('alteraqtd.html') quando se invoca o endereço
+'/alterarqtd', sendo exibido um formulário que pede um valor de texto
+(pre-populado com o valor actual):
 
 - 'Quantidade'
 
 ![alterarqtd.html](alterarqtd_html.png)
 
 este valor é usado para um update ao campo 'quantidade' do item
-na base de dados.
+na base de dados:
+
+```
+    with sqlite3.connect('database.db') as compras: 
+        cursor = compras.cursor()
+        cursor.execute('UPDATE ARTIGOS SET quantidade = ? WHERE nome = ?', (quantidade, nome) )
+        compras.commit()
+```
+
+concluída a actualização é feito um redirecionamento para a página principal.
+
+
+### a ação 'Confirmar'
+
+Esta ação não requer uma página própria, sendo invocada directamente da página principal
+a partir dos links associados às quantidades de cada artigo.
+
+Estes links são criados dinâmicamente na página principal:
+
+```
+    <a href="/confirmar?nome={{item[0]}}">
+```
+
+de modo que por exemplo para o item abaixo:
+
+![Confirmar](confirmar.png)
+
+o link gerado é 'http://127.0.0.1/confirmar?nome=Detergente'
+
+sendo passado o parâmetro 'nome' com o valor 'Detergente' à ação 'confirmar'.
+Este parâmetro é então usado para uma operação UPDATE na base dados, sendo
+alterado o valor do campo 'estado' para '1':
+
+```
+@app.route('/confirmar')
+def confirmar():
+	nome = request.args.get('nome')
+	with sqlite3.connect('database.db') as compras: 
+		cursor = compras.cursor()
+		cursor.execute('UPDATE ARTIGOS SET estado = 1 WHERE nome = ?', (nome,) )
+		compras.commit() 
+```
+
+evidentemente TODAS as linhas na tabela com o campo 'nome' igual
+ao parâmetro fornecido serão actualizadas já que não é feita qualquer validação.
+
+No final é feito o redirecionamento para a página principal para forçar
+um refresh.
+
+
+### a ação 'Remover'
+
+Esta ação não requer uma página própria, sendo invocada directamente da página principal
+a partir dos links associados às quantidades de cada artigo.
+
+Estes links são criados dinâmicamente na página principal:
+
+```
+    <a href="/remover?nome={{item[0]}}">
+```
+
+de modo que por exemplo para o item abaixo:
+
+![Confirmar](confirmar.png)
+
+o link gerado é 'http://127.0.0.1/remover?nome=Detergente'
+
+sendo passado o parâmetro 'nome' com o valor 'Detergente' à ação 'remover'.
+Este parâmetro é então usado para uma operação DELETE
+
+```
+@app.route('/remover')
+def remover():
+	nome = request.args.get('nome')
+	with sqlite3.connect('database.db') as compras: 
+		cursor = compras.cursor() 
+		cursor.execute('DELETE FROM ARTIGOS WHERE nome = ?', (nome,) )
+		compras.commit()
+```
+
+evidentemente TODAS as linhas na tabela com o campo 'nome' igual
+ao parâmetro fornecido serão eliminadas já que não é feita qualquer validação.
+
+No final é feito o redirecionamento para a página principal para forçar
+um refresh.
 
 
 ## Ainda por fazer
 
 - aprofundar um pouco a explicação
+- validar inputs de modo a por exemplo impedir a adição de um artigo com o mesmo
+nome de outro já existente
 
 
 ## Notas

@@ -64,7 +64,10 @@ def alterarqtd():
 			compras.commit()
 		return redirect('/home')
 
-	else: 
+	else:
+		# this will not work correctly if there are several items with
+		# the same name
+		
 		connect = sqlite3.connect('database.db')
 		cursor = connect.cursor() 
 		cursor.execute('SELECT * FROM ARTIGOS WHERE nome = ?', (nome,)) 
