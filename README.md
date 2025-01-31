@@ -1,6 +1,15 @@
 # lista_de_compras
 
-Uma app muito simples para adquirir experiência em Python e Flask
+Uma web app muito simples para adquirir experiência em Python e Flask.
+
+Sem querer ainda dei por mim a desenferrujar um pouco as minhas noções
+de SQL (ao utilizar uma base de dados sqlite3) e CSS (ao usar os
+recursos [W3-CSS](https://www.w3schools.com/w3css/default.asp) para aplicar
+estilos aos conteúdos HTML gerados).
+
+Outro bónus inesperado é que quase sem alterações coloquei a web app
+a funcionar no [PythonAnywhere.Com](https://cyberx.pythonanywhere.com/)
+
 
 ## Objectivo
 
@@ -278,6 +287,52 @@ ao parâmetro fornecido serão eliminadas já que não é feita qualquer valida�
 
 No final é feito o redirecionamento para a página principal para forçar
 um refresh.
+
+
+## Web App na WWW
+
+Existem serviços gratuitos de alojamento de web servers em python.
+
+Criei uma conta no PythonAnyhwere.com e seguindo as instruções acima
+consegui ter a minha web app online em pouco tempo.
+
+[Lista de Compras](https://cyberx.pythonanywhere.com/)
+
+### notas
+
+O flask é um web server que segue a norma WSGI (Web Server Gateway Interface),
+tal como o Django e alguns outros.
+
+PythomAnywhere.com é um serviço de alojamento que segue esta norma, oferecendo 
+alojamento gratuito para pequenos projectos.
+
+Criei uma conta (gratuita, válida por 3 meses mas renovável) que me permite
+aceder a uma shell onde criei a pasta e o ambiente virtual e instalei as 
+libraries do flask e do sqlite.
+
+Trasferi os meus ficheiros (via browser) para dentro do ambiente virtual
+('app.py' e 'database.db' directamente para a pasta e os 3 ficheros .html para
+uma subpasta 'templates').
+
+Depois adicionei uma web app, tendo optado pela opção "Manual Configuration" para poder usar um ambiente virtual.
+
+No final especifiquei o caminho para esse ambiente (i.e. '/home/cyberx/lista_de_compras/lista_de_compras') e editei o ficheiro de configuração WSGI, na
+parte de configuração respeitante ao flask:
+
+```
+import sys
+path = '/home/cyberx/lista_de_compras'
+if path not in sys.path:
+   sys.path.append(path)
+```
+
+Finalmente fiz Reload da web app e quase que funcionou: pelos erros do log
+não encontrava a base de dades, tive de editar o ficheiro 'app.py' e
+especificar o caminho completo '/home/cyberx/lista_de_compras/database.db'
+em todas as conexões.
+
+Esta web app funciona na porta 443 (HTTPS) em vez da porta 5000 que o flask
+usa nativamente.
 
 
 ## Ainda por fazer
