@@ -1,0 +1,54 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <title>Flask and SQLite </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1 /">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />        
+    </head> 
+    <body>
+      <div class="w3-row">
+        <table class="w3-table w3-border w3-twothird" > 
+            <tr class="w3-border w3-topbar w3-bottombar w3-blue w3-border-blue"> 
+              <th>Produto</th> 
+              <th>Quantidade</th> 
+              <th class="w3-center">Comprado</th>			  
+      			  <th class="w3-center">Remover</th>
+            </tr> 
+            {%for item in data%} 
+               <tr class="w3-border">
+                 <td>
+                    {{item[0]}}
+                 </td>
+                 <td>
+                    <a href="/alterarqtd?nome={{item[0]}}">{{item[1]}}</a>                  
+                 </td>
+                 <td class="w3-center">
+                    {% if item[2] == 0 %}
+                      <a href="/confirmar?nome={{item[0]}}">
+                        <button class="w3-button w3-circle"><i class="far fa-circle"></i></button>
+                      </a>
+                    {% else %}
+                    <i class="far fa-check-circle"></i>
+                    {% endif %}
+        				 </td>
+				 <td class="w3-center">
+					<a href="/remover?nome={{item[0]}}">
+            <button class="w3-button w3-circle"><i class="fas fa-times"></i></button>
+          </a>
+				 </td>
+                </tr> 
+            {%endfor%} 
+          </table>
+      </div>
+
+    <div class="w3-row">
+      <br />
+    </div>
+    <div class="w3-row">
+		  <a href="/adicionar" class="w3-twothird w3-center">
+        <button class="w3-button w3-blue w3-border w3-round-large">Adicionar</button>
+      </a>
+    </div>
+  </body> 
+</html> 

@@ -1,0 +1,16 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <title>Adicionar Artigo </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
+    </head> 
+    <body> 
+        <form method="POST"> 
+            <label>Produto:</label> 
+            <input type="nome" name="nome" placeholder="nome do produto a comprar" required><br/> 
+            <label>Quantidade:</label> 
+            <input type="quantidade" name="quantidade" placeholder="quantidade a comprar" required><br/> 
+            <input type = "submit" value = "ADICIONAR"/><br/> 
+        </form> 
+    </body> 
+</html>

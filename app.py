@@ -1,0 +1,77 @@
+from flask import Flask, render_template, request , redirect
+import sqlite3 
+
+app = Flask(__name__) 
+
+
+@app.route('/') 
+@app.route('/home')
+def index(): 
+	connect = sqlite3.connect('database.db')
+	cursor = connect.cursor() 
+	cursor.execute('SELECT * FROM ARTIGOS') 
+	data = cursor.fetchall() 
+	return render_template('index.html', data=data) 
+
+
+@app.route('/adicionar', methods=['GET', 'POST']) 
+def adicionar(): 
+	if request.method == 'POST': 
+		nome = request.form['nome'] 
+		quantidade = request.form['quantidade'] 
+
+		with sqlite3.connect('database.db') as compras: 
+			cursor = compras.cursor() 
+			cursor.execute('INSERT INTO ARTIGOS(nome,quantidade,estado) VALUES (?,?,?)', (nome, quantidade,0))  
+			compras.commit() 
+
+		return redirect('/home')
+	else: 
+		return render_template('adicionar.html') 
+
+
+@app.route('/confirmar')
+def confirmar():
+	nome = request.args.get('nome')
+	with sqlite3.connect('database.db') as compras: 
+		cursor = compras.cursor()
+		cursor.execute('UPDATE ARTIGOS SET estado = 1 WHERE nome = ?', (nome,) )
+		compras.commit() 	
+
+	return redirect('/home')
+
+
+@app.route('/remover')
+def remover():
+	nome = request.args.get('nome')
+	with sqlite3.connect('database.db') as compras: 
+		cursor = compras.cursor() 
+		cursor.execute('DELETE FROM ARTIGOS WHERE nome = ?', (nome,) )
+		compras.commit() 	
+
+	return redirect('/home')
+
+
+@app.route('/alterarqtd', methods=['GET', 'POST'])
+def alterarqtd():
+	nome = request.args.get('nome')	
+	if request.method == 'POST': 
+		quantidade = request.form['quantidade']
+
+		with sqlite3.connect('database.db') as compras: 
+			cursor = compras.cursor()
+			cursor.execute('UPDATE ARTIGOS SET quantidade = ? WHERE nome = ?', (quantidade, nome) )
+			compras.commit()
+		return redirect('/home')
+
+	else: 
+		connect = sqlite3.connect('database.db')
+		cursor = connect.cursor() 
+		cursor.execute('SELECT * FROM ARTIGOS WHERE nome = ?', (nome,)) 
+		data = cursor.fetchall() 
+		connect.close()
+		return render_template('alterarqtd.html', data=data) 
+
+
+if __name__ == '__main__': 
+	app.run(debug=False) 
