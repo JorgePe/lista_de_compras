@@ -341,6 +341,22 @@ usa quando usado no Ubuntu (e noutros sistemas) por isso para aceder basta usar 
 
 [https://cyberx.pythonanywhere.com/](https://cyberx.pythonanywhere.com/)
 
+### git + PythonAnywhere
+
+Entretanto percebi que o PythonAnywhere disponibiliza o comando 'git' pelo que é
+possível sincronizar com o meu repositório no github:
+
+```
+git init
+git remote add origin https://github.com/JorgePe/lista_de_compras.git
+git pull
+git checkout main -f
+git branch --set-upstream-to origin/main
+```
+
+agora quando altero alguma coisa no reposiório principal (no github)
+sincronizo a web app no PythonAnywhere assim:
+
 
 ## Ainda por fazer
 
