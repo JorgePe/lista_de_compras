@@ -355,8 +355,14 @@ git branch --set-upstream-to origin/main
 ```
 
 agora quando altero alguma coisa no reposiório principal (no github)
-sincronizo a web app no PythonAnywhere assim:
+sincronizo a web app no PythonAnywhere acedendo à consola bash na
+página de Administração e dando o comando:
 
+```
+git pull
+```
+
+se for relevante (normalmente é) faço tb o Reload da web app
 
 ## Ainda por fazer
 
