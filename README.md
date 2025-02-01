@@ -27,7 +27,7 @@ Deve ser possível:
 
 ![index.html](index_html.png)
 
-## Implementação
+## Preparação
 
 Criar e activar um virtual environment (estou a usar Ubuntu Linux):
 
@@ -43,6 +43,10 @@ Instalar as libraries de flask (web server) e sqlite (base de dados):
 pip install flask
 pip install db-sqlite3
 ```
+
+## Implementação
+
+### começando do zero
 
 Criar uma base de dados em formato sqlite3 chamada 'database.db' com uma tabela 'ARTIGOS'
 com 3 campos:
@@ -62,9 +66,19 @@ Criar uma pasta 'templates' onde ficarão as páginas HTML servidas:
 -  'adicionar.html' - um formulário para adicionar um novo artigo à lista
 -  'alterarqtd.html' - um formulário para alterar a quantidade pretendida de um artigo
 
-Podia ser crida também uma pasta 'static' contendo ficheiros de estilos (CSS) para
+Podia ser criada também uma pasta 'static' contendo ficheiros de estilos (CSS) para
 embelezar as páginas mas optei por utilizar [W3-CSS](https://www.w3schools.com/w3css/default.asp)
 directamente inline (ou seja é necessário acesso à internet durante a execução do web server).
+
+
+### aproveitando o github
+
+transferir os ficheiros do github (ou por download ou via git) sendo apenas necessários:
+- na pasta da app:
+    - app.py
+    - database.db   
+- na pasta 'templates':
+    - os ficheiros .html
 
 
 ## Utilização
@@ -298,21 +312,20 @@ consegui ter a minha web app online em pouco tempo.
 
 [Lista de Compras no PythonAnywhere](https://cyberx.pythonanywhere.com/)
 
-### notas breves
+### notas curtas para instalar app no PythonAnywhere
 
-- o flask é um web server que segue a norma WSGI (Web Server Gateway Interface),
-tal como o Django e alguns outros.
-- PythonAnywhere.com é um serviço de alojamento que segue esta norma, oferecendo 
-alojamento gratuito para pequenos projectos.
-- criei uma conta (gratuita, válida por 3 meses mas renovável) que me permite
-aceder a uma shell onde criei a pasta e o ambiente virtual e instalei as 
-libraries do flask e do sqlite.
-- transferi os meus ficheiros (via browser) para dentro do ambiente virtual
-('app.py' e 'database.db' directamente para a pasta e os 3 ficheros .html para
-uma subpasta 'templates').
-- adicionei uma web app, tendo optado pela opção "Manual Configuration" para poder usar um ambiente virtual.
-- no final especifiquei o caminho para esse ambiente (i.e. '/home/cyberx/lista_de_compras/lista_de_compras') e editei o ficheiro de configuração WSGI, na
-parte de configuração respeitante ao flask:
+1. o Flask é um web server que segue a norma WSGI (Web Server Gateway Interface),
+tal como o Django e alguns outros;
+2. PythonAnywhere.com é um serviço de alojamento que segue a norma WSGI, oferecendo 
+alojamento gratuito para pequenos projectos, sendo a gestão feita via browser;
+3. criei uma conta (gratuita, válida por 3 meses mas renovável);
+4. segui o processo de [Preparação](#preparação) descrito acima
+5. transferi os meus ficheiros para dentro do ambiente virtual
+6. na página de Administração do PythonAnywhere adicionei uma nova web app, tendo optado pela opção "Manual Configuration" para poder usar um ambiente virtual
+7. ainda na página de Administração:
+ * defini a 'Working directory': '/home/cyberx/lista_de_compras/'
+ * defini o Virtualenv: '/home/cyberx/lista_de_compras/lista_de_compras'
+ * editei o ficheiro de configuração WSGI, colocando na parte de configuração respeitante ao flask:
 
 ```
 import sys
@@ -321,12 +334,12 @@ if path not in sys.path:
    sys.path.append(path)
 ```
 
-- finalmente fiz Reload da web app e quase que funcionou: pelos erros do log
-não encontrava a base de dades, tive de editar o ficheiro 'app.py' e
-especificar o caminho completo '/home/cyberx/lista_de_compras/database.db'
-em todas as conexões.
-- esta web app funciona na porta 443 (HTTPS) em vez da porta 5000 que o flask
-usa nativamente.
+ * fiz Reload da web app para iniciar a web app com as configurações feitas
+
+No PythonAnywhere a web app funciona na porta 443 (HTTPS) em vez da porta 5000 que o flask
+usa quando usado no Ubuntu (e noutros sistemas) por isso para aceder basta usar o URL:
+
+[https://cyberx.pythonanywhere.com/](https://cyberx.pythonanywhere.com/)
 
 
 ## Ainda por fazer
