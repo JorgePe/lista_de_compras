@@ -62,9 +62,10 @@ Criar um ficheiro 'app.py' que implementa um web server em flask e gere as conex
 
 Criar uma pasta 'templates' onde ficarão as páginas HTML servidas:
 
--  "index.html" - a página principal que mostra a lista
--  'adicionar.html' - um formulário para adicionar um novo artigo à lista
--  'alterarqtd.html' - um formulário para alterar a quantidade pretendida de um artigo
+- "index.html" - a página principal que mostra a lista
+- 'adicionar.html' - um formulário para adicionar um novo artigo à lista
+- 'alterarqtd.html' - um formulário para alterar a quantidade pretendida de um artigo
+- 'aviso.html' - uma página invocada para para passar mensagens (alertas de erros p.ex.)
 
 Podia ser criada também uma pasta 'static' contendo ficheiros de estilos (CSS) para
 embelezar as páginas mas optei por utilizar [W3-CSS](https://www.w3schools.com/w3css/default.asp)
@@ -101,9 +102,19 @@ e podemos aceder à web app pelo link [http://127.0.0.1:5000](http://127.0.0.1:5
 
 ## Explicação
 
+
+### a aplicação web
+
+A aplicação python propriamente dita reside no ficheiro 'app.py'.
+
+Este ficheiro importa as libraries necessárias (flask e sqlite), define o
+nome e o caminho do ficheiro usado para base de dados e implementa
+alguns métodos ou funções:
+
+
 ### a página principal
 
-A aplicação 'app.py' usa esta página ('index.html') como página principal,
+A aplicação usa esta página ('index.html') como página principal,
 sendo apresentada quando se invoca o endereço principal ('/') ou endereço '/home'.
 
 ![index.html](index_html.png)
@@ -151,7 +162,7 @@ base de dados. Também usa um ícone [W3-CSS Font Awesome 5](https://www.w3schoo
 
 ### a página de adição de artigos
 
-A aplicação 'app.py' usa esta página ('adicionar.html') para exibir um formulário
+A aplicação usa esta página ('adicionar.html') para exibir um formulário
 HTML quando se que invoca o endereço '/adicionar'.
 
 Enquanto que as páginas normais apenas requerem comandos HTTP de consulta ('GET')
@@ -178,7 +189,8 @@ Este formulário pede dois valores de texto:
 
 ![adicionar.html](adicionar_html.png)
 
-Estes valores são usados para criar um novo item na base de dados
+Caso ainda não exista nenhum item na base de dados com o mesmo nome,
+estes valores são usados para criar um novo item na base de dados
 (sempre na tabela ARTIGOS) sendo feito o seguinte mapeamento:
 
 - 'nome' é preenchido com o texto vindo de 'Produto'
@@ -195,10 +207,18 @@ Estes valores são usados para criar um novo item na base de dados
 depois do novo artigo ser inserido na base de dados é feito um redirecionamento para
 a página principal.
 
+Nota: a validação do nome do artigo é muito básica, limito-me a
+verificar se já existe um item com o mesmo nome ignorando as diferenças
+de maiúsculas e minúsculas.
+
+Assim:
+- 'Leite', 'leite' e 'leiTe' são considerados iguais
+- 'Leite', 'Leites' e 'Leite Magro" são considerados diferentes
+
 
 ### a página de alteração de quantidades
 
-A aplicação 'app.py' usa esta página ('alteraqtd.html') quando se invoca o endereço
+A aplicação usa esta página ('alteraqtd.html') quando se invoca o endereço
 '/alterarqtd', sendo exibido um formulário que pede um valor de texto
 (pre-populado com o valor actual):
 
@@ -223,6 +243,12 @@ quantidade para o valor em falta e não ser aceite a alteração para quantidade
 inferiores àquelas já adquiridas (fica para mais tarde).
 
 Concluída a actualização é feito um redirecionamento para a página principal.
+
+### a página de aviso ###
+
+A aplicação usa esta página ('aviso.html') para mostrar uma mensagem
+pertinente (por exemplo avisar que se tentou adicionar um artigo já existente),
+retornando em seguida à página principal.
 
 
 ### a ação 'Confirmar'
@@ -366,17 +392,22 @@ se for relevante (normalmente é) faço tb o Reload da web app
 
 ## Ainda por fazer
 
-- validar inputs de modo a por exemplo impedir a adição de um artigo com o mesmo
-nome de outro já existente
-
+-  ~~validar inputs de modo a por exemplo impedir a adição de um artigo com o mesmo
+nome de outro já existente~~
+- validar a alteração de quantidades
 
 ## Notas
 
-A lógica da aplicação é extremamente básica, sem validações.
+A lógica da aplicação é extremamente básica, com muito poucas validações.
 
-Por exemplo se forem adicionados à lista de compras dois items
+Por exemplo:
+~~se forem adicionados à lista de compras dois items
 com o mesmo nome (por exemplo 'Leite 1 litro' e 'Leite 2 litros')
-e for marcado um deles como comprado o outro também será.
+e for marcado um deles como comprado o outro também será.~~
 
-Da mesma forma se for removido um item todos os outros com o
-mesmo nome também serão removidos.
+~~da mesma forma se for removido um item todos os outros com o
+mesmo nome também serão removidos.~~
+
+se for editada a quantidade de artigos a comprar não é verificado
+se o artigo já foi marcado como comprado; nem sequer se o valor
+introduzido faz sentido (0 por exemplo é aceite)

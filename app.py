@@ -1,43 +1,51 @@
 from flask import Flask, render_template, request , redirect
-import sqlite3 
+import sqlite3
 
-app = Flask(__name__) 
+app = Flask(__name__)
 
 database_path = './database.db'
 
-@app.route('/') 
+@app.route('/')
 @app.route('/home')
-def index(): 
+def index():
 	connect = sqlite3.connect(database_path)
-	cursor = connect.cursor() 
-	cursor.execute('SELECT * FROM ARTIGOS') 
-	data = cursor.fetchall() 
-	return render_template('index.html', data=data) 
+	cursor = connect.cursor()
+	cursor.execute('SELECT * FROM ARTIGOS')
+	data = cursor.fetchall()
+	return render_template('index.html', data=data)
 
 
 @app.route('/adicionar', methods=['GET', 'POST']) 
 def adicionar(): 
-	if request.method == 'POST': 
-		nome = request.form['nome'] 
-		quantidade = request.form['quantidade'] 
+	if request.method == 'POST':
+		nome = request.form['nome']
+		quantidade = request.form['quantidade']
 
-		with sqlite3.connect(database_path) as compras: 
-			cursor = compras.cursor() 
-			cursor.execute('INSERT INTO ARTIGOS(nome,quantidade,estado) VALUES (?,?,?)', (nome, quantidade,0))  
-			compras.commit() 
+		with sqlite3.connect(database_path) as compras:
+			cursor = compras.cursor()
+			# verificar já existe artigo com este nome (ignorar maiúsculas)
+			cursor.execute('SELECT * FROM ARTIGOS WHERE LOWER(nome) = LOWER(?)', (nome,) )
+			data = cursor.fetchall()			
+
+			if data :
+				# este nome já existe
+				return render_template('aviso.html', msg="Artigo já existente")
+			else:
+				cursor.execute('INSERT INTO ARTIGOS(nome,quantidade,estado) VALUES (?,?,?)', (nome, quantidade,0))
+				compras.commit()
 
 		return redirect('/home')
-	else: 
-		return render_template('adicionar.html') 
+	else:
+		return render_template('adicionar.html')
 
 
 @app.route('/confirmar')
 def confirmar():
 	nome = request.args.get('nome')
-	with sqlite3.connect(database_path) as compras: 
+	with sqlite3.connect(database_path) as compras:
 		cursor = compras.cursor()
 		cursor.execute('UPDATE ARTIGOS SET estado = 1 WHERE nome = ?', (nome,) )
-		compras.commit() 	
+		compras.commit()
 
 	return redirect('/home')
 
@@ -70,12 +78,12 @@ def alterarqtd():
 		# the same name
 
 		connect = sqlite3.connect(database_path)
-		cursor = connect.cursor() 
-		cursor.execute('SELECT * FROM ARTIGOS WHERE nome = ?', (nome,)) 
-		data = cursor.fetchall() 
+		cursor = connect.cursor()
+		cursor.execute('SELECT * FROM ARTIGOS WHERE nome = ?', (nome,))
+		data = cursor.fetchall()
 		connect.close()
-		return render_template('alterarqtd.html', data=data) 
+		return render_template('alterarqtd.html', data=data)
 
 
-if __name__ == '__main__': 
-	app.run(debug=False) 
+if __name__ == '__main__':
+	app.run(debug=False)
