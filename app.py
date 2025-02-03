@@ -74,9 +74,6 @@ def alterarqtd():
 		return redirect('/home')
 
 	else:
-		# this will not work correctly if there are several items with
-		# the same name
-
 		connect = sqlite3.connect(database_path)
 		cursor = connect.cursor()
 		cursor.execute('SELECT * FROM ARTIGOS WHERE nome = ?', (nome,))
