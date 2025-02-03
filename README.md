@@ -52,7 +52,7 @@ pip install db-sqlite3
 
 ### começando do zero
 
-Criar uma base de dados em formato sqlite3 chamada 'database.db' com uma tabela 'ARTIGOS'
+Criar uma base de dados em formato sqlite3 chamada 'database.db' com uma única tabela 'ARTIGOS'
 com 3 campos:
 
 - 'nome' [TEXT]
@@ -61,17 +61,26 @@ com 3 campos:
 
 (eu usei uma extensão do vscode para o fazer)
 
-Criar um ficheiro 'app.py' que implementa um web server em flask e gere as conexões
+'nome' especifica o nome do produto a adquirir, devendo ser único (é feita uma
+validação na aplicaação ao adicionar novos artigos mas no schema da base de dados 
+não há nada que o impeça)
+
+'quantidade' especifica a quantidade de produto a adquirir [seja ela qual for]
+
+'estado' identifica se o produto já foi comprado ('1') ou não ('0')
+
+Em seguida criar um ficheiro 'app.py' que implementa um web server em flask e gere as conexões
 à base de dados.
 
-Criar uma pasta 'templates' onde ficarão as páginas HTML servidas:
+Finalmente criar uma sub-pasta 'templates' onde ficarão as páginas HTML servidas pela
+web app:
 
 - "index.html" - a página principal que mostra a lista
 - 'adicionar.html' - um formulário para adicionar um novo artigo à lista
 - 'alterarqtd.html' - um formulário para alterar a quantidade pretendida de um artigo
-- 'aviso.html' - uma página invocada para para passar mensagens (alertas de erros p.ex.)
+- 'aviso.html' - uma página invocada para passar mensagens (alertas de erros p.ex.)
 
-Podia ser criada também uma pasta 'static' contendo ficheiros de estilos (CSS) para
+Podia ser criada também uma outra sub-pasta 'static' contendo ficheiros de estilos (CSS) para
 embelezar as páginas mas optei por utilizar [W3-CSS](https://www.w3schools.com/w3css/default.asp)
 directamente inline (ou seja é necessário acesso à internet durante a execução do web server).
 
