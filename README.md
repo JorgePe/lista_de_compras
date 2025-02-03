@@ -25,6 +25,10 @@ Deve ser possível:
 - remover artigos
 - marcar artigos como comprados
 
+adicionei uma outra funcionalidade:
+- permitir editar quantidades a artigos da lista ainda por comprar
+
+
 ![index.html](index_html.png)
 
 ## Preparação
