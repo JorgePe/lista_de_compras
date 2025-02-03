@@ -23,7 +23,7 @@ def adicionar():
 
 		with sqlite3.connect(database_path) as compras:
 			cursor = compras.cursor()
-			# verificar já existe artigo com este nome (ignorar maiúsculas)
+			# verificar se já existe artigo com este nome (ignorar maiúsculas)
 			cursor.execute('SELECT * FROM ARTIGOS WHERE LOWER(nome) = LOWER(?)', (nome,) )
 			data = cursor.fetchall()			
 
