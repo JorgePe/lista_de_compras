@@ -8,7 +8,7 @@ recursos [W3-CSS](https://www.w3schools.com/w3css/default.asp) para aplicar
 estilos aos conteúdos HTML gerados).
 
 Outro bónus inesperado é que quase sem alterações coloquei a web app
-a funcionar no [PythonAnywhere.Com](https://cyberx.pythonanywhere.com/)
+a funcionar no [PythonAnywhere.Com](https://pythonanywhere.com/)
 
 
 ## Objectivo
@@ -236,11 +236,13 @@ na base de dados:
         compras.commit()
 ```
 
-Não está implementada nenhuma validação pelo que é possível alterar a quantidade
-a um artigo já marcado como comprado. Podia ser feita uma validação, por exemplo
-se a nova quantidade fosse superior ser reinicializado o estado e actualizada a
-quantidade para o valor em falta e não ser aceite a alteração para quantidades
-inferiores àquelas já adquiridas (fica para mais tarde).
+O valor de 'quantidade' é representado como texto e não é validado pelo que qualquer texto
+é aceite:
+- 0
+- zero
+- 1 pacote
+- três litros
+- duas meias dúzias
 
 Concluída a actualização é feito um redirecionamento para a página principal.
 
@@ -255,12 +257,19 @@ retornando em seguida à página principal.
 ### a ação 'Confirmar'
 
 Esta ação não requer uma página própria, sendo invocada directamente da página principal
-a partir dos links associados às quantidades de cada artigo.
+a partir dos links associados ao estado de cada artigo.
 
-Estes links são criados dinâmicamente na página principal:
+Estes links são criados dinâmicamente na terceira coluna da página principal:
 
 ```
-    <a href="/confirmar?nome={{item[0]}}">
+    <td class="w3-center">
+        <!-- estado do item (comprado ou por comprar) -->
+        <!-- se já comprado não permitir mudar estado -->
+        {% if item[2] == 0 %}
+            <a href="/confirmar?nome={{item[0]}}">
+    ...
+    </td>
+">
 ```
 
 de modo que por exemplo para o item abaixo:
@@ -296,12 +305,16 @@ um refresh.
 ### a ação 'Remover'
 
 Esta ação não requer uma página própria, sendo invocada directamente da página principal
-a partir dos links associados às quantidades de cada artigo.
+a partir dos links associados a cada artigo.
 
-Estes links são criados dinâmicamente na página principal:
+Estes links são criados dinâmicamente na quarta coluna da página principal:
 
 ```
-    <a href="/remover?nome={{item[0]}}">
+    <td class="w3-center">
+        <!-- remover item -->
+        <a href="/remover?nome={{item[0]}}">
+    ...    
+    </td>
 ```
 
 de modo que por exemplo para o item abaixo:
