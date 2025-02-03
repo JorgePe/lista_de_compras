@@ -22,21 +22,31 @@
               {%for item in data%} 
                 <tr class="w3-border">
                   <td>
-                      {{item[0]}}
+                    <!-- nome do item -->
+                    {{item[0]}}
                   </td>
                   <td>
-                      <a href="/alterarqtd?nome={{item[0]}}">{{item[1]}}</a>                  
+                    <!-- quantidade do item -->
+                    <!-- se o item já foi comprado não permitir alterar a quantidade-->
+                    {% if item[2] == 0 %}
+                      <a href="/alterarqtd?nome={{item[0]}}">{{item[1]}}</a>
+                    {% else %}
+                      {{item[1]}}
+                    {% endif %}
                   </td>
                   <td class="w3-center">
-                      {% if item[2] == 0 %}
-                        <a href="/confirmar?nome={{item[0]}}">
-                          <button class="w3-button w3-circle"><i class="far fa-circle"></i></button>
-                        </a>
-                      {% else %}
+                    <!-- estado do item (comprado ou por comprar) -->
+                    <!-- se já comprado não permitir mudar estado -->
+                    {% if item[2] == 0 %}
+                      <a href="/confirmar?nome={{item[0]}}">
+                        <button class="w3-button w3-circle"><i class="far fa-circle"></i></button>
+                      </a>
+                    {% else %}
                       <i class="far fa-check-circle"></i>
-                      {% endif %}
+                    {% endif %}
                   </td>
                   <td class="w3-center">
+                    <!-- remover item -->
                     <a href="/remover?nome={{item[0]}}">
                       <button class="w3-button w3-circle"><i class="fas fa-times"></i></button>
                     </a>

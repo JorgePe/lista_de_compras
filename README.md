@@ -393,22 +393,23 @@ se for relevante (normalmente é) faço tb o Reload da web app
 
 ## Ainda por fazer
 
--  ~~validar inputs de modo a por exemplo impedir a adição de um artigo com o mesmo
+- ~~validar inputs de modo a por exemplo impedir a adição de um artigo com o mesmo
 nome de outro já existente~~
-- validar a alteração de quantidades
+- ~~validar a alteração de quantidades~~
 
 ## Notas
 
 A lógica da aplicação é extremamente básica, com muito poucas validações.
 
 Por exemplo:
-~~se forem adicionados à lista de compras dois items
+
+- ~~se forem adicionados à lista de compras dois items
 com o mesmo nome (por exemplo 'Leite 1 litro' e 'Leite 2 litros')
 e for marcado um deles como comprado o outro também será.~~
 
-~~da mesma forma se for removido um item todos os outros com o
+- ~~da mesma forma se for removido um item todos os outros com o
 mesmo nome também serão removidos.~~
 
-se for editada a quantidade de artigos a comprar não é verificado
-se o artigo já foi marcado como comprado; nem sequer se o valor
+- se for editada a quantidade de artigos a comprar não é verificado
+~~se o artigo já foi marcado como comprado; nem sequer~~ se o valor
 introduzido faz sentido (0 por exemplo é aceite)
