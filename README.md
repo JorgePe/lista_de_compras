@@ -250,6 +250,7 @@ A aplicação usa esta página ('aviso.html') para mostrar uma mensagem
 pertinente (por exemplo avisar que se tentou adicionar um artigo já existente),
 retornando em seguida à página principal.
 
+![Aviso](aviso_html.png)
 
 ### a ação 'Confirmar'
 
